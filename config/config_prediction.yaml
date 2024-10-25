@@ -1,0 +1,59 @@
+data_subfolder_name: &data_subfolder_name property_prediction
+root_dir: ""
+base_model: &base_model "" ### You need to download the LLaMA model and specify the path.
+path:
+  data_path: &data_path
+    - "train_data"
+    - *data_subfolder_name
+  train_data_path: 
+    - *data_path
+    - "samples.json"
+  valid_data_path:
+    - *data_path
+    - "samples.json"
+  test_data_path:
+    - *data_path
+    - "samples.json"
+  output_dir: &output_dir 
+    - "trained_models"
+    - *data_subfolder_name
+  lora_weights: null 
+architecture:
+  lora_r: 32
+  lora_alpha: 64
+  lora_dropout: 0.05
+  lora_target_modules:
+    - "q_proj"
+    - "v_proj"
+train:
+  batch_size: 1
+  micro_batch_size: 1
+  warmup_steps: 10
+  num_epochs: &num_epochs 10
+  num_masking_sets: 1
+  learning_rate: 0.0002
+  cutoff_len: 4096
+  val_set_size: 0
+  train_on_inputs: false
+  add_eos_token: false 
+  prompt_template_name: alpaca 
+  use_valid_set: 0
+  evaluation_strategy: epoch
+  save_total_limit: *num_epochs
+  group_by_length: false
+  resume_from_checkpoint: null
+  saved_sample_data: 1
+wandb:
+  wandb_project: ""
+  wandb_run_name: ""
+  wandb_watch: ""
+  wandb_log_model: ""
+inference:
+  generate_for_all_checkpoints: 1
+  parsing_pattern: search
+  do_sample: false
+  temperature: 0.5
+  load_8bit: false
+properties:
+  - "Valid Quantum Yield\\: (\\d+\\.*\\d*)\\s?\\%"
+  - "Stability Factor\\: (\\d+\\.*\\d*)\\s?"

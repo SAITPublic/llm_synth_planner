@@ -1,0 +1,15 @@
+target_props:
+  "Valid Quantum Yield":
+    bound:
+      - 90
+      - 100
+    reg_pattern: "Valid Quantum Yield\\: (\\d+\\.*\\d*)\\s?\\%"
+    replacement: "Valid Quantum Yield: {}%"
+  "Stability Factor":
+    bound:
+      - 90
+      - 100
+    reg_pattern: "Stability Factor\\: (\\d+\\.*\\d*)"
+    replacement: "Stability Factor: {}"
+noise: 0.0
+iterations: 15

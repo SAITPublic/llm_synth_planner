@@ -1,0 +1,4 @@
+add_noise_to_output:
+  - "Valid Quantum Yield\\:\\s*(\\d+\\.?\\d*)\\s*\\%"
+  - "Valid Quantum Yield: {}%"
+  - 1.73
